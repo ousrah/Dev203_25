@@ -48,8 +48,6 @@ alter table bien add constraint fk_bien_type foreign key (id_type)
 						references type(id_type) on delete cascade on update cascade; 
 alter table bien add constraint fk_bien_client foreign key (id_client) 
 						references client(id_client) on delete cascade on update cascade; 
-                        
-                        
 
 alter table contrat add constraint fk_contrat_bien foreign key (reference) 
 						references bien(reference) on delete cascade on update cascade; 
