@@ -124,5 +124,3 @@ INSERT INTO PARTICIPE (ID_JOCKEY, ID_CHEVAL, ID_SESSION, CLASSEMENT) VALUES
 (1, 3, 9, 1);
 
 
-select * from participe order by classement;
-update participe set id_cheval = 6 where id_cheval = 2;

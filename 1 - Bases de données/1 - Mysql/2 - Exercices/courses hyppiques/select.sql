@@ -61,8 +61,29 @@ group by ch.ID_CHEVAL, ch.nom_cheval)
 select * from t1 where nb_des_trophies in ( select max(nb_des_trophies) 
 											from t1);
 
+select * from parent where id_cheval = 1;
 -- F.	Les parents du cheval qui a remporté le plus grand nombre de compétitions
 
+select c1.NOM_CHEVAL, c2.* from cheval c1 
+			join parent p using(id_cheval)
+			join cheval c2 on p.id_parent  = c2.id_cheval                                           
+			where c1.id_cheval in (1,4);
+            
+            
+with t1 as (select ch.id_cheval,ch.nom_cheval, count(ch.id_cheval) as nb_des_trophies from cheval ch
+join participe p using(id_cheval)
+where p.CLASSEMENT=1
+group by ch.ID_CHEVAL, ch.nom_cheval),
+champion as (select * from t1 where nb_des_trophies in ( select max(nb_des_trophies) 
+											from t1))
+select champion.nom_cheval, les_parents.*  
+from champion  
+left join parent using(id_cheval)
+left join cheval les_parents on les_parents.id_cheval = parent.id_parent;
+
+
+		
+            
 -- G.	Le montant total remporté par 'black' dans toutes les compétitions qu'il a remporté
 
 -- H.	La catégorie que le cheval 'black' remporte le plus
