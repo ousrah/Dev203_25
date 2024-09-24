@@ -16,7 +16,7 @@ create table CATEGORIE
    ID_CATEGORIE         int not null auto_increment,
    NOM_CATEGORIE        varchar(50),
    primary key (ID_CATEGORIE)
-);
+) engine=InnoDB;
 
 /*==============================================================*/
 /* Table: CHAMP                                                 */
@@ -27,7 +27,7 @@ create table CHAMP
    NOM_CHAMP            varchar(50),
    NB_PLACES            bigint,
    primary key (ID_CHAMP)
-);
+) engine=InnoDB;
 
 /*==============================================================*/
 /* Table: CHEVAL                                                */
@@ -40,7 +40,7 @@ create table CHEVAL
    DATE_NAISSACE        date,
    SEXE_CHEVAL          varchar(1),
    primary key (ID_CHEVAL)
-);
+) engine=InnoDB;
 
 /*==============================================================*/
 /* Table: COURSE                                                */
@@ -52,7 +52,7 @@ create table COURSE
    ID_CHAMP             int not null,
    NOM_COURSE           varchar(50),
    primary key (ID_COURSE)
-);
+) engine=InnoDB;
 
 /*==============================================================*/
 /* Table: JOCKEY                                                */
@@ -63,7 +63,7 @@ create table JOCKEY
    NOM_JOCKEY           varchar(50),
    PRENOM_JOCKEY        varchar(50),
    primary key (ID_JOCKEY)
-);
+) engine=InnoDB;
 
 /*==============================================================*/
 /* Table: PARENT                                                */
@@ -72,7 +72,7 @@ create table PARENT
 (  ID_CHEVAL        int not null,
    ID_parent            int not null,
    primary key (ID_CHEVAL, ID_parent)
-);
+) engine=InnoDB;
 
 /*==============================================================*/
 /* Table: PARTICIPE                                             */
@@ -84,7 +84,7 @@ create table PARTICIPE
    ID_SESSION           int not null,
    CLASSEMENT           int,
    primary key (ID_JOCKEY, ID_CHEVAL, ID_SESSION)
-);
+) engine=InnoDB;
 
 /*==============================================================*/
 /* Table: PROPRIETAIRE                                          */
@@ -95,7 +95,7 @@ create table PROPRIETAIRE
    NOM_PROPRIETAIRE     varchar(50),
    PRENOM_PROPRIETAIRE  varchar(50),
    primary key (ID_PROPRIETAIRE)
-);
+) engine=InnoDB;
 
 /*==============================================================*/
 /* Table: SESSION                                               */
@@ -108,7 +108,7 @@ create table SESSION
    DATE_SESSION         time,
    DOTATION_SESSION     float,
    primary key (ID_SESSION)
-);
+) engine=InnoDB;
 
 /*==============================================================*/
 /* Table: ORGANISE                                            */
@@ -118,7 +118,7 @@ create table ORGANISE
    ID_CHAMP             int not null,
    ID_CATEGORIE         int not null,
    primary key (ID_CHAMP, ID_CATEGORIE)
-);
+) engine=InnoDB;
 
 alter table CHEVAL add constraint FK_POSSEDE foreign key (ID_PROPRIETAIRE)
       references PROPRIETAIRE (ID_PROPRIETAIRE) on delete restrict on update restrict;

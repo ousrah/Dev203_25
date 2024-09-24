@@ -89,6 +89,12 @@ INSERT INTO SESSION (ID_COURSE, NOM_SESSION, DATE_SESSION, DOTATION_SESSION) VAL
 (4, 'Juin 2024', '2024-06-18 14:30:00', 70000),
 (5, 'Juillet 2024', '2024-07-20 13:00:00', 55000);
 
+
+INSERT INTO SESSION (ID_COURSE, NOM_SESSION, DATE_SESSION, DOTATION_SESSION) VALUES 
+(1, 'Aout 2024', '2024-03-15 14:00:00', 50000),  -- Prix d'Amérique session Mars 2024
+(1, 'Sept 2024', '2024-04-12 15:00:00', 60000);
+
+select * from session;
 /* Insertion de données dans la table PARTICIPE */
 INSERT INTO PARTICIPE (ID_JOCKEY, ID_CHEVAL, ID_SESSION, CLASSEMENT) VALUES 
 (1, 1, 1, 2),  -- Black
@@ -103,4 +109,20 @@ INSERT INTO PARTICIPE (ID_JOCKEY, ID_CHEVAL, ID_SESSION, CLASSEMENT) VALUES
 (10, 10, 3, 1); 
 
 
+INSERT INTO PARTICIPE (ID_JOCKEY, ID_CHEVAL, ID_SESSION, CLASSEMENT) VALUES 
+(1, 1, 4, 1),  
+(1, 2, 4, 2),  
+(1, 3, 4, 3),  
+(1, 1, 5, 1),  
+(1, 2, 5, 2),  
+(1, 3, 5, 3),  
+(1, 1, 8, 2),  
+(1, 2, 8, 1),  
+(1, 3, 8, 3),  
+(1, 1, 9, 2),  
+(1, 2, 9, 3),  
+(1, 3, 9, 1);
 
+
+select * from participe order by classement;
+update participe set id_cheval = 6 where id_cheval = 2;
