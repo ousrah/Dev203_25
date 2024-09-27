@@ -147,8 +147,102 @@ select compare2(13,4);
 /*
 on souhaite ecrire une fonction qui accept trois entiers et qui 
 retourne leur plus grande valeur
-/*
+*/
+select ceil(rand()*20);
 
+drop function if exists calculmaximum ;
+delimiter && 
+create function calculmaximum (a int, b int ,c int ) 
+	returns int
+    deterministic
+    begin
+    declare d int ;
+    if (a > b and a > c ) then 
+		set d = a ;
+    elseif( b>a and b> c) then
+		set d = b ;
+    else 
+		set d= c;
+    end if ;
+    return d;
+    end && 
+delimiter ;
+
+select calculmaximum(4,5,9); #9 operations
+select calculmaximum(4,15,9); #9 operations
+select calculmaximum(44,15,9); #6 operations
+
+drop function if exists calculmaximum ;
+delimiter && 
+create function calculmaximum (a int, b int ,c int ) 
+	returns int
+    deterministic
+    begin
+    if (a > b and a > c ) then 
+		return a ;
+    elseif( b>a and b> c) then
+		return b ;
+    else 
+		return c;
+    end if ;
+    end && 
+delimiter ;
+
+select calculmaximum(4,5,9); #7 operations
+select calculmaximum(4,15,9); #7 operations
+select calculmaximum(44,15,9); #4 operations
+
+
+
+drop function if exists calculmaximum ;
+delimiter && 
+create function calculmaximum (a int, b int ,c int ) 
+	returns int
+    deterministic
+    begin
+		declare d int;
+		set d = a;
+		if b > d  then 
+			set d = b;
+		end if;
+		if c > d then
+			return c;
+		end if;
+		return d;
+    end && 
+delimiter ;
+
+select calculmaximum(4,5,9); #6 operations
+select calculmaximum(4,15,9); #5 operations
+select calculmaximum(44,15,9); #5 operations
+
+
+
+drop function if exists calculmaximum ;
+delimiter && 
+create function calculmaximum (a int, b int ,c int ) 
+	returns int
+    deterministic
+    begin
+		if a > b  then 
+			if a > c then
+				return a;
+			else
+				return c;
+			end if;
+		else
+			if b>c then
+				return b;
+			else
+				return c;
+			end if;
+		end if;
+    end && 
+delimiter ;
+
+select calculmaximum(4,5,9); #3 operations
+select calculmaximum(4,15,9); #3 operations
+select calculmaximum(44,15,9); #3 operations
 
 
 
@@ -165,6 +259,35 @@ on souhaite ecrire une fonction qui reçoit tous les paramètres
 et qui affiche le montant de la participation selon 
 le prix de repas acheté par l'employé
 */
+
+
+drop function if exists participation_repas;
+delimiter $$
+	create function participation_repas(repas float, salaire float,etat varchar(1),enfants int)
+		returns float
+		deterministic
+    begin
+		declare taux float;
+        set taux=0.2;
+        if salaire<2500 then 
+			set taux=taux+.15;
+        end if;
+        if etat="o" then 
+			set taux=taux+0.05;
+        end if;
+		set taux=taux+(enfants*0.1);
+        if taux>0.6 then 
+			set taux=0.6;
+        end if;
+		return repas*taux;
+    end $$
+delimiter ;
+
+select participation_repas(100,5000,"o",4);
+
+
+
+
 
 #exercice 3
 /*
