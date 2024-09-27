@@ -81,9 +81,29 @@ from champion
 left join parent using(id_cheval)
 left join cheval les_parents on les_parents.id_cheval = parent.id_parent;
 
-
-		
+	
             
 -- G.	Le montant total remporté par 'black' dans toutes les compétitions qu'il a remporté
 
+select sum(dotation_session)
+from cheval 
+join participe using(id_cheval) 
+join session using(id_session)
+where nom_cheval = 'black'
+and classement = 1;
+
 -- H.	La catégorie que le cheval 'black' remporte le plus
+
+with nb_vic_par_categorie as (select nom_categorie, count(id_categorie) as nb_victoires from cheval 
+join participe using(id_cheval)
+join session using(id_session)
+join course using (id_course)
+join categorie using(id_categorie)
+where nom_cheval = 'black'
+and classement = 1
+group by nom_categorie),
+max as (select max(nb_victoires) as nb_victoires from nb_vic_par_categorie)
+select * from nb_vic_par_categorie join max using(nb_victoires);
+
+
+
