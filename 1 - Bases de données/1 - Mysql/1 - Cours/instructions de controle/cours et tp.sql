@@ -500,7 +500,146 @@ delimiter ;
 select jour(1);
 
 
-# Les boucles while et repeat
+
+# equation 2eme degres avec case
+
+drop function if exists SolveEquation2Grade;
+ delimiter $$
+ create function SolveEquation2Grade(a int ,b int, c int)
+ returns varchar(100)
+ DETERMINISTIC
+ begin
+    DECLARE delta float;
+	declare r varchar(50);
+    if(a=0) then
+          if b=0 then
+               if c=0 then
+                  set r =  "R";
+		      ELSE
+                 set r =  "Impossible";
+		      end if;
+	      else
+		    set r =  (-c/b);
+	    end if;
+	else
+		set delta=b*b-4*a*c;
+        set r =  case 
+			when delta<0 then 		 "impossible"
+			when delta=0 then		-b/(2*a)
+			else	concat("x1 = ",(-b-sqrt(delta))/(2*a)," ,x2= ",(-b+sqrt(delta))/(2*a))
+		end ;
+	end if;
+    return r;
+ end $$
+ delimiter ;
+ select SolveEquation2Grade(0,0,0);
+ select SolveEquation2Grade(0,0,5);
+ select SolveEquation2Grade(0,2,8);
+ select SolveEquation2Grade(1,2,-3);
+ select SolveEquation2Grade(4,4,1);
+ select SolveEquation2Grade(1,2,3);
+
+
+
+
+# Les boucles 
+#E1 - #ecrire une fonction qui calcule la somme des premiers entiers inférieur à n;
+#utiliser les trois formes des boucles while, repeat et loop;
+
+#E2 - #ecrire une fonction qui calcule la somme des premiers entiers paires inférieur à n;
+
+#E3 - #ecrire une fonction qui calcule le factoriel d'un entier;
+#Rappel 5! = 5x4x3x2;
+# 1! = 1;
+# 0! = 1;
+
+
+
+
+
+
+
+
+
+
+
+# la boucle while 
+drop function if exists somme;
+delimiter $$
+create function somme(n int)
+returns bigint
+deterministic
+begin
+	declare s bigint default 0;
+    declare i int default 1;
+    while i<=n do
+		set s= s + i;
+        set i= i+1;
+	end while;
+	return s;
+end $$
+delimiter ;
+
+select somme(5);
+# la boucle repeat
+
+
+
+drop function if exists somme;
+delimiter $$
+create function somme(n int)
+returns bigint
+deterministic
+begin
+	declare s bigint default 0;
+    declare i int default 0;
+    repeat 
+		set s= s + i;
+        set i= i+1;
+	until i>n end repeat;
+	return s;
+end $$
+delimiter ;
+
+select somme(5);
+select somme(4);
+select somme(3);
+select somme(2);
+select somme(1);
+select somme(0);
+
+
+# la boucle loop
+
+
+
+drop function if exists somme;
+delimiter $$
+create function somme(n int)
+returns bigint
+deterministic
+begin
+	declare s bigint default 0;
+    declare i int default 0;
+    l1:loop
+		set s= s + i;
+        set i= i+1;
+        if i>n then
+			leave l1;
+        end if;
+	end loop;
+	return s;
+end $$
+delimiter ;
+
+select somme(5);
+select somme(4);
+select somme(3);
+select somme(2);
+select somme(1);
+select somme(0);
+
+
 
 # les fonctions
 
