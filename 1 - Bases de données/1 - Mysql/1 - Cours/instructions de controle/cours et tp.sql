@@ -546,12 +546,6 @@ drop function if exists SolveEquation2Grade;
 #E1 - #ecrire une fonction qui calcule la somme des premiers entiers inférieur à n;
 #utiliser les trois formes des boucles while, repeat et loop;
 
-#E2 - #ecrire une fonction qui calcule la somme des premiers entiers paires inférieur à n;
-
-#E3 - #ecrire une fonction qui calcule le factoriel d'un entier;
-#Rappel 5! = 5x4x3x2;
-# 1! = 1;
-# 0! = 1;
 
 
 
@@ -641,10 +635,88 @@ select somme(0);
 
 
 
+#E2 - #ecrire une fonction qui calcule la somme des premiers entiers paires inférieur ou égale à n;
+
+drop function if exists somme;
+delimiter $$
+create function somme(n int)
+returns bigint
+deterministic
+begin
+	declare s bigint default 0;
+    declare i int default 0;
+    while i<=n do
+		if i%2=0 then 
+			set s= s + i;
+        end if;
+        set i= i+1;
+	end while;
+	return s;
+end $$
+delimiter ;
+
+select somme(6);
+
+
+
+
+
+#E3 - #ecrire une fonction qui calcule le factoriel d'un entier;
+#Rappel 5! = 5x4x3x2;
+# 1! = 1;
+# 0! = 1;
+
+drop function if exists facto;
+delimiter $$
+create function facto(n int)
+returns bigint
+deterministic
+begin
+	declare f bigint default 1;
+    declare i int default 1;
+    while i<=n  do
+		set f= f * i;
+        set i= i+1;
+	end while;
+	return f;
+end $$
+delimiter ;
+select facto(5);
+select facto(0);
+select facto(1);
+
+
+
+
 # les fonctions
 
 
 
+set @x=5;
+select somme(@x);
+select facto(@x);
+
+
+select dotation_session into @d from session where id_session = 1;
+select somme(@d);
+
+drop function if exists getDotation;
+delimiter $$
+create function getDotation(id int)
+	returns float
+    reads sql data
+begin
+	declare d float;
+    -- select dotation_session into d from session where id_session = id;
+    set d = (select dotation_session  from session where id_session = id);  # when select returns a scalar value
+    
+    return d;
+end $$
+delimiter ;
+
+select getDotation(1);
+select getDotation(1) into @d;
+select @d
 
 
 #les procedures stockées
