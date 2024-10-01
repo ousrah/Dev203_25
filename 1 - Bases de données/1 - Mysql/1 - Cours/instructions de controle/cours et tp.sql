@@ -384,9 +384,120 @@ drop function if exists SolveEquation2Grade;
 
 #exercice ecrire une fonction qui recupère le numero d'une journée et qui affiche son nom en arabe.
 
-"الأحد الإثنبن الثلاثاء الأربعاء الخميس الجمعة السبت"
+"الأحد الإثنبن الثلاثاء الأربعاء الخميس الجمعة السبت";
+
+# eviter de faire des comparaisons commen l'algorithme suivant
+
+drop function if exists jour;
+delimiter $$
+create function jour(a int)
+returns varchar(50)
+deterministic
+begin 
+	declare j varchar(50);
+	if a=1 then 
+		set j =  "الأحد";
+	end if;
+	if a=2 then
+	  set j =   "الإثنبن";
+	end if;  
+	if a=3 then
+	  set j =   "الثلاثاء";
+	end if;
+	if a=4 then
+	  set j =   "الأربعاء";
+	end if;
+	if a=5 then
+	  set j =   "الخميس";
+	end if;
+	if a=6 then
+	  set j =   "الجمعة";
+	end if;
+	if a=7 then
+	  set j =   "السبت";
+	end if;
+	if a<1 or a>7 then
+	 set j =   "Erreur";
+	end if;
+	return j;
+end $$
+delimiter ;
+select jour(7);
 
 
+#solution optimale
+
+drop function if exists jour;
+delimiter $$
+create function jour(a int)
+returns varchar(50)
+deterministic
+begin 
+declare j varchar(50);
+if a=1 then set j =  "الأحد";
+elseif a=2 then  set j =   "الإثنبن";
+elseif a=3 then  set j =   "الثلاثاء";
+elseif a=4 then  set j =   "الأربعاء";
+elseif a=5 then  set j =   "الخميس";
+elseif a=6 then  set j =   "الجمعة";
+elseif a=7 then  set j =   "السبت";
+else  set j =   "Erreur";
+end if;
+return j;
+end $$
+delimiter ;
+select jour(1);
+
+#utilisation de case (forme1)
+
+drop function if exists jour;
+delimiter $$
+create function jour(a int)
+returns varchar(50)
+deterministic
+begin
+declare j varchar(50);
+set j = case a
+when 1 then "الأحد"
+when 2 then  "الإثنبن"
+when 3 then  "الثلاثاء"
+when 4 then  "الأربعاء"
+when 5 then  "الخميس"
+when 6 then  "الجمعة"
+when 7 then  "السبت"
+else "Erreur"
+end ;
+return j;
+end $$
+delimiter ;
+select jour(3);
+
+
+
+
+#utilisation de case (forme 2)
+
+drop function if exists jour;
+delimiter $$
+create function jour(a int)
+returns varchar(50)
+deterministic
+begin
+declare j varchar(50);
+set j = case
+when a=1 then "الأحد"
+when a=2 then  "الإثنبن"
+when a=3 then  "الثلاثاء"
+when a=4 then  "الأربعاء"
+when a=5 then  "الخميس"
+when a=6 then  "الجمعة"
+when a=7 then  "السبت"
+else "Erreur"
+end ;
+return j;
+end $$
+delimiter ;
+select jour(1);
 
 
 # Les boucles while et repeat
