@@ -301,6 +301,31 @@ si A = 0 et B = 0  x = R
 si A = 0 et B <> 0 x = impossible
 si A <>  0 x = -b/a
 */
+use courses203;
+
+
+
+drop function if exists E1Degre;
+delimiter &&
+create function E1Degre(a float,b float)
+returns varchar(50)
+deterministic
+begin 
+	if a=0 then
+		if b=0 then
+			return "la solution est l'ensemble R";
+		else	
+			return "impossible";
+		end if;
+	else
+		return concat("il y a un solution :",-b/a);
+	end if;
+end &&
+delimiter ;
+
+select E1Degre(5,4)
+
+
 
 
 #exercice 4
@@ -319,6 +344,49 @@ si A <> 0
      si delta = 0 x1 = x2 = -b/2a
       si delta > 0 x1 = (-b-racine(delta))/2a  et x2 =  (-b+racine(delta))/2a   
     */
+
+drop function if exists SolveEquation2Grade;
+ delimiter $$
+ create function SolveEquation2Grade(a int ,b int, c int)
+ returns varchar(100)
+ DETERMINISTIC
+ begin
+    DECLARE delta float;
+
+    if(a=0) then
+          if b=0 then
+               if c=0 then
+                  return "R";
+		      ELSE
+                 return "Impossible";
+		      end if;
+	      else
+		   return (-c/b);
+	    end if;
+	else
+		set delta=b*b-4*a*c;
+		if delta<0 then 
+				return "impossible";
+		elseif delta=0 then
+				return -b/(2*a);
+		ELSE
+				return concat("x1 = ",(-b-sqrt(delta))/(2*a)," ,x2= ",(-b+sqrt(delta))/(2*a));
+		end if;
+	end if;
+ end $$
+ delimiter ;
+ select SolveEquation2Grade(0,0,0);
+ select SolveEquation2Grade(0,0,5);
+ select SolveEquation2Grade(0,2,8);
+ select SolveEquation2Grade(1,2,-3);
+ select SolveEquation2Grade(4,4,1);
+ select SolveEquation2Grade(1,2,3);
+
+#exercice ecrire une fonction qui recupère le numero d'une journée et qui affiche son nom en arabe.
+
+"الأحد الإثنبن الثلاثاء الأربعاء الخميس الجمعة السبت"
+
+
 
 
 # Les boucles while et repeat
