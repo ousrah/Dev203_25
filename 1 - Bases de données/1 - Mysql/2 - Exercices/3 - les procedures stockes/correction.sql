@@ -123,14 +123,75 @@ call e2(4,9);
 
 #Exercice 3 :
 #Ecrire une PS qui retourne le prix moyen des produits (utiliser un paramètre OUTPUT) ; Exécuter la PS ;
+drop procedure if exists e3;
+delimiter $$
+create procedure e3(out pm int)
+begin 
+	select avg(PU) into pm from Produit;
+end $$
+delimiter ;
+
+call e3(@x);
+select @x;
+
 #Exercice 4 :
 #Créer une procédure stockée qui accepte comme paramètre un entier et retourne le factoriel de ce nombre.
 
+
+-- exercice 4  --
+
+drop procedure if exists E4;
+delimiter $$
+create procedure E4 ( r  int, out facto int )
+begin 
+	declare i int default 1 ;
+	set facto = 1;
+	while  i<=r do
+		Set facto=facto*i ;
+		set  i = i+1 ;
+    end while ;
+end $$
+delimiter ;
+call e4(5,@f) ;
+select @f;
 #Exercice 5 :
 #1.	Créer une procédure stockée qui accepte les paramètres suivants : 
 #a.	 2 paramètres de type entier  
 #b.	 1 paramètre de type caractère.
 #c.	1 paramètre output de type entier
+
+drop procedure if exists e5;
+delimiter //
+	create procedure e5(a int , b int , op varchar(1) , out res varchar(150))
+    begin
+		declare i int default 1;
+		declare r bigint default 1 ;
+		if op = "+" then 
+			set res = a+b ;
+		elseif op = "-" then 
+			set res = a-b;
+		elseif op = "*" then
+			set res = a*b ;
+		elseif op = "/" then 
+			if b = 0 then
+				set res = "la division sur 0 est impossible ";
+			else
+				set res = a/b;
+			end if;
+		elseif op = "%" then
+			set res = a%b;
+		elseif op = "!" then 
+			while ( i <= a ) do
+				set r = r * i;
+				set i = i+1;
+			end while ;
+			set res = r ;
+		end if ;
+    end //
+delimiter ;
+
+call e5(5,9,"/",@r);
+select @r as resultat;
 
 #La procédure doit enregistrer le résultat de calcul entre les deux nombres selon l’opérateur passé dans le troisième paramètre (+,-,%,/,*). 
 #Exercice 6 :
@@ -140,6 +201,58 @@ Ingrédients (NumIng, NomIng, PUIng, UniteMesureIng, NumFou)
 Composition_Recette (NumRec, NumIng, QteUtilisee)
 Fournisseur (NumFou, RSFou, AdrFou)
 Créer les procédures stockées suivantes :*/
+
+
+
+drop database if exists cuisine_203;
+create database cuisine_203;
+use cuisine_203;
+create table Recettes (
+NumRec int auto_increment primary key, 
+NomRec varchar(50), 
+MethodePreparation varchar(60), 
+TempsPreparation int
+);
+create table Fournisseur (
+NumFou int auto_increment primary key, 
+RSFou varchar(50), 
+AdrFou varchar(100)
+);
+create table Ingredients (
+NumIng int auto_increment primary key,
+NomIng varchar(50), 
+PUIng float, 
+UniteMesureIng varchar(20), 
+NumFou int,
+   constraint  fkIngredientsFournisseur foreign key (NumFou) references Fournisseur(NumFou)
+);
+create table Composition_Recette (
+NumRec int not null,
+constraint  fkCompo_RecetteRecette foreign key (NumRec) references Recettes(NumRec), 
+NumIng int not null ,
+  constraint  fkCompo_RecetteIngredients foreign key (NumIng) references Ingredients(NumIng),
+QteUtilisee int,
+constraint  pkRecetteIngredients primary key (NumIng,NumRec)
+);
+
+insert into Recettes  values(1,'gateau','melangeprotides' ,30),
+							(2,'pizza ','melangeglucides' ,15),
+							(3,'couscous','melangelipides' ,45);
+                            
+insert into Fournisseur  values (1,'meditel','fes'),
+								(2,'maroc telecom','casa'),
+								(3,'inwi','taza');
+                                
+                                
+insert into Ingredients values(1,'Tomate', 100,'cl',1),
+								(2,'ail', 200,'gr',2),
+								(3,'oignon', 300,'verre',3);
+							
+insert into Composition_Recette values (2,1,10);
+insert into Composition_Recette values (2,2,1);
+
+
+
 #PS1 : Qui affiche la liste des ingrédients avec pour chaque ingrédient le numéro, le nom et la raison sociale du fournisseur.
 #PS2 : Qui affiche pour chaque recette le nombre d'ingrédients et le montant cette recette
 #PS3 : Qui affiche la liste des recettes qui se composent de plus de 10 ingrédients avec pour chaque recette le numéro et le nom
