@@ -28,12 +28,23 @@ insert into product values
 select * from product;
 select * from vente;
 
-insert into vente value(null,12,1);
+insert into vente value(null,1,1), (null,1,3), (null,1,4);
+
+delete from vente where id_vente = 7;
 
 drop trigger if exists insertvente;
 delimiter $$
 create trigger insertvente  after insert on vente for each row
 begin
 	update product set stock = stock-new.qte where id_product = new.id_product;
+end $$
+delimiter ;
+
+
+drop trigger if exists deletevente;
+delimiter $$
+create trigger deletevente  after delete on vente for each row
+begin
+	update product set stock = stock+old.qte where id_product = old.id_product;
 end $$
 delimiter ;
