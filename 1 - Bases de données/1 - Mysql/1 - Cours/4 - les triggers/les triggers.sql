@@ -28,10 +28,10 @@ insert into product values
 select * from product;
 select * from vente;
 
-insert into vente value(null,1,1), (null,1,3), (null,1,4);
 
-delete from vente where id_vente = 7;
 
+
+-- trigger d'insertion
 drop trigger if exists insertvente;
 delimiter $$
 create trigger insertvente  after insert on vente for each row
@@ -40,7 +40,10 @@ begin
 end $$
 delimiter ;
 
+insert into vente value(null,1,1), (null,1,3), (null,1,4);
 
+
+-- trigger de suppression
 drop trigger if exists deletevente;
 delimiter $$
 create trigger deletevente  after delete on vente for each row
@@ -48,3 +51,18 @@ begin
 	update product set stock = stock+old.qte where id_product = old.id_product;
 end $$
 delimiter ;
+
+delete from vente where id_vente = 7;
+
+
+-- trigger de modification
+
+drop trigger if exists updatevente;
+delimiter $$
+create trigger updatevente  after update on vente for each row
+begin
+	update product set stock = stock+old.qte-new.qte where id_product = old.id_product;
+end $$
+delimiter ;
+
+update vente set qte = 3 where id_vente = 6;
