@@ -73,6 +73,38 @@ end $$
 delimiter ;
 
 
+#capturer le message d'erreur avec un diagnostic
+# référence des sqlstate pour mysql https://www.briandunning.com/error-codes/?source=MySQL
+drop procedure if exists insert_produit;
+delimiter $$
+create procedure insert_produit(n varchar(50))
+begin
+	declare flag boolean default false;
+	declare v_errno int;
+    declare v_msg varchar(250);
+    declare v_sqlstate varchar(5);
+    begin
+		declare exit handler for sqlexception
+        begin
+			get diagnostics condition 1
+				 v_sqlstate = returned_sqlstate,
+                 v_errno = mysql_errno,
+                 v_msg = message_text;
+			set flag = true;
+        end;
+        insert into produit value (null,n);
+        select "insertion effectuée avec success";
+    end;
+    if flag then
+		select  concat("message d'erreur : ", v_msg, " - numero d'erreur: " , v_errno, " - etat d'erreur :  ", v_sqlstate) as "error";
+	end if;
+		
+   
+end $$
+delimiter ;
+
+
+
 
 call insert_produit ('pc');
 call insert_produit (null); #1048
@@ -81,6 +113,6 @@ call insert_produit ('pc'); #1062
 call insert_produit ('souris'); 
 call insert_produit ('clavier'); 
 call insert_produit ('claculatrice'); 
-
+call insert_produit ('table'); 
 
 select * from produit;
