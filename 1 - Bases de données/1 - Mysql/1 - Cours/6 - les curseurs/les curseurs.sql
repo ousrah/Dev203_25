@@ -101,7 +101,7 @@ select * from vol where numpil=1;
 select timediff(datea, dated) from vol where numpil = 1;
 select sec_to_time(sum(time_to_sec(timediff(datea, dated)))) from vol where numpil = 1;
 
-
+#Exercice pour chaque pilote on souhaite ajouter un  vol de sa ville de résidence a marrakech le 13/10/2024 de 10h à 13h;
 
 
 
