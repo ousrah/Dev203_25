@@ -103,6 +103,35 @@ select sec_to_time(sum(time_to_sec(timediff(datea, dated)))) from vol where nump
 
 #Exercice pour chaque pilote on souhaite ajouter un  vol de sa ville de résidence a marrakech le 13/10/2024 de 10h à 13h;
 
+use vols_203 ;
+
+
+drop procedure if exists set_vol ;
+delimiter //
+	create procedure set_vol()
+    begin
+		declare id2 int ;
+        declare v varchar(120);
+        
+        declare flag boolean default false;
+
+        declare c2 cursor for select numpilote , villepilote from pilote ;
+        declare continue handler for not found set flag = true ;
+        
+        open c2;
+			b2 : loop
+				fetch c2 into id2 , v;
+				if flag then 
+					leave b2 ; 
+				end if ;
+                insert into vol values(null , v , 'Marrackech' , '2024-10-13 10:00:00' , '2024-10-13 13:00:00' , id2 , 2);
+            end loop b2;
+        close c2;
+    end //
+delimiter ;
+select * from vol;
+call set_vol();
+
 
 
 
