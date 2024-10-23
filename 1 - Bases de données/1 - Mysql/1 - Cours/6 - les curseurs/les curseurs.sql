@@ -88,7 +88,7 @@ begin
 			leave b1;		
 		end if;
         #traitement a faire pour le pilote en cours
-			select sum(timediff(datea, dated)) into n from vol where numpil = id;
+			select sec_to_time(sum(time_to_sec(timediff(datea, dated)))) into n from vol where numpil = id;
             update pilote set nbhv = n where numpilote = id;
     end loop b1;
     close c1;
@@ -97,6 +97,10 @@ delimiter ;
 
 call set_nbhv();
 select * from pilote;
+select * from vol where numpil=1;
+select timediff(datea, dated) from vol where numpil = 1;
+select sec_to_time(sum(time_to_sec(timediff(datea, dated)))) from vol where numpil = 1;
+
 
 
 
