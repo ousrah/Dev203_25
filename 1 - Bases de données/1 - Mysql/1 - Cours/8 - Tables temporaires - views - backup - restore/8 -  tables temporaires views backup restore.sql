@@ -94,8 +94,12 @@ mysqldump -u root -p123456 cuisine_203 > cuisine_203D.sql
 
 	#methode 3 (sur la console mysql)
 	mysql -u root -p
+    
+    #creer la base de données dans la console mysql
 	create database test3 collate utf8mb4_general_ci; #(attention ne pas oublier ;)
+    #ouvrir la base de données dans la console mysql
 	use test3;
+    #lancer l'execution du script dans la console mysql
 	source cuisine_202B.sql  #(sans ;) (préciser le chemin du fichier, si vous donnez juste le nom il doit le trouver dans le dossier a partir duquel vous avez lancé la console mysql)
 
 
