@@ -69,12 +69,41 @@ mysqldump -u root -p cuisine_203 > cuisine_203.sql
 mysqldump -h 127.0.0.1 -P 3306 -u root -p cuisine_203 > cuisine_203B.sql
 
 #ici on a fourni aussi le mot de passe il doit être collé a -p (min)
-mysqldump -h 127.0.0.1 -P 3306 -u root -p123456 cuisine_202 > cuisine_202B.sql
-mysqldump -u root -p123456 cuisine_202 > cuisine_202B.sql
-
-
-
-
+mysqldump -h 127.0.0.1 -P 3306 -u root -p123456 cuisine_203 > cuisine_203C.sql
+mysqldump -u root -p123456 cuisine_203 > cuisine_203D.sql
 
 
 # Le Restore (Restoration ou la récupération
+
+		
+	#methode 1 (pour les petits scripts)
+		#Créer une nouvelle base de données
+		create database test;
+		use test;
+		#ouvrir le script sauvegardé dans workbench
+		#lancer le script dans workbench
+
+
+	#Methode 2 ( en ligne de commande) en utilisant mysql
+    #creer une base de données sur workbench
+	create database test2 collate uft8mb4_general_ci;
+    
+    #lancer la restauration sur la ligne de commande avec mysql
+	mysql -u root -p test2 < cuisine_202B.sql  #(préciser le chemin du fichier s''il ne se trouve pas dans le dossier en cours)
+
+
+	#methode 3 (sur la console mysql)
+	mysql -u root -p
+	create database test3 collate utf8mb4_general_ci; #(attention ne pas oublier ;)
+	use test3;
+	source cuisine_202B.sql  #(sans ;) (préciser le chemin du fichier, si vous donnez juste le nom il doit le trouver dans le dossier a partir duquel vous avez lancé la console mysql)
+
+
+
+
+
+
+
+
+
+
