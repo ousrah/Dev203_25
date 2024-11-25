@@ -1,0 +1,16 @@
+Approche agile 100h  75/25
+
+généralités sur la gestion des projets
+La méthode Agile & SCRUM
+
+Jeu de simulation de projet SCRUM
+
+MS PROJECT
+JIRA
+
+GIT - GITHUB - GITLAB
+DOCKER
+
+SONARCUBE - La qualité du projet
+
+pipeline CI/CD integration continue et déploiement continue
