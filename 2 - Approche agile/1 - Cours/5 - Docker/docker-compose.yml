@@ -20,7 +20,7 @@ services:
     container_name: db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: laravel
+      MYSQL_DATABASE: myDB
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_PASSWORD: 123456
       MYSQL_USER: dbuser
