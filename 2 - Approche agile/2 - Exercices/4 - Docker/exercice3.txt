@@ -1,4 +1,5 @@
-Créer un docker compose qui permet de lancer un environnement de développement avec les composants suivants :
+Créer un docker compose qui permet de lancer un environnement de développement avec 
+les composants suivants :
  - MongoDB port 27017
  - apache2 port 8000
  - php8.1-fpm
