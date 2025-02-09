@@ -1,0 +1,6 @@
+projectKey=produits
+serverUrl=http://localhost:9091
+serverVersion=8.9.10.61524
+dashboardUrl=http://localhost:9091/dashboard?id=produits
+ceTaskId=AZTs3EwGbrzi75XghCKL
+ceTaskUrl=http://localhost:9091/api/ce/task?id=AZTs3EwGbrzi75XghCKL
