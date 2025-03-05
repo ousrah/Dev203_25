@@ -20,7 +20,7 @@ services:
       - sonarqube_extensions:/opt/sonarqube/extensions
       - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
   pg:
-    image: postgres
+    image: postgres:15
     ports:
         - "5432:5432"
     restart: unless-stopped
