@@ -54,10 +54,27 @@ composer create-project laravel/laravel project2
 ouvrir le project sur vsCode
 ouvrir le fichier .env
 configurer la connection avec MySQL
+php artisan migrate
+
+fermer toutes les executions des anciens project ou utiliser un autre port
+
+php artisan serve
+php artisan serve --port=8001
+
 
 
 pour installer une version spécifique de laravel
 composer create-project laravel/laravel project3 11.*
+
+ouvrir le project sur vsCode
+ouvrir le fichier .env
+configurer la connection avec MySQL
+php artisan migrate
+
+fermer toutes les executions des anciens project ou utiliser un autre port
+
+php artisan serve
+php artisan serve --port=8002
 
 
 
