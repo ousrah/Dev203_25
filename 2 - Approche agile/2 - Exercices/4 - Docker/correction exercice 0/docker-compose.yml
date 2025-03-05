@@ -1,5 +1,5 @@
 services:
- 
+
   db:
     image: mysql:9.2.0
     container_name: db
@@ -9,4 +9,4 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 123456
     volumes:
-      - d:\mysqldata:/var/lib/mysql
+      - c:\mysqldata:/var/lib/mysql

@@ -1,0 +1,63 @@
+php --version --> 8.2 et sup
+composer --version  --> 2.7 et sup
+MySQL --version  --> 8.0 et sup
+
+composer global require laravel/installer
+
+laravel --version  --> 5.12
+
+
+
+activer ces extensions sur votre php.ini
+
+extension_dir = "ext"
+
+extension=bz2
+extension=curl
+extension=fileinfo
+extension=gd
+extension=gettext
+extension=gmp
+extension=intl
+extension=mbstring
+extension=openssl
+extension=pdo_mysql
+extension=xsl
+extension=zip
+
+
+
+laravel new myProject
+
+cd myPorject
+
+npm run build
+
+php artisan serve
+
+
+ouvrir le project sur vsCode
+ouvrir le fichier .env
+configurer la connection avec MySQL
+
+
+ouvrir le terminal
+php artisan migrate
+php artisan serve
+
+2ème méthode
+composer create-project laravel/laravel project2
+ouvrir le project sur vsCode
+ouvrir le fichier .env
+configurer la connection avec MySQL
+
+
+pour installer une version spécifique de laravel
+composer create-project laravel/laravel project3 11.*
+
+
+
+
+
+
+
