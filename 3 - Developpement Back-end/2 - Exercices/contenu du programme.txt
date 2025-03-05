@@ -1,21 +1,18 @@
 Notions sur Laravel
 Installation de laravel
+La migration de la base de données
+Les seeders
 Creation d'un blog
 -------------------------
 Installation des packages
-Breeze (Gestion des authentification)
+Breeze (Gestion des authentification) --> jetstream (vue, react, liveware)
 Les langues (internationalisation)
-La migration de la base de données
-Les seeders
--------------------------------
-L'installation de livewire
-PowerGrid (datatable)
-Modal-ui livewire
-----------------------------------
+-------------------------
 L'authentification
+L'envoi des emails
 L'integration d'une dashboard (admin panel - ADMINLTE)
 -------------------------------------
-L'envoi des emails
+
 -----------------
 Le upload des fichiers
 les cookies
@@ -24,11 +21,18 @@ la sécurité (CSRF)
 L'exportation EXCEL
 l'importation EXCEL
 L'impression PDF
-L'integration des statistques (charts)
+L'integration des statistiques (charts)
 l'hebergement du site
 L'integration des statistiques (google analytics)
 les tests unitaires
 l'integration du site CI/CD
+
+-------------------------------
+L'installation de livewire
+PowerGrid (datatable)
+Modal-ui livewire
+----------------------------------
+
 ---------------------------
 Les CMS (Content Management System)
 ---------------------

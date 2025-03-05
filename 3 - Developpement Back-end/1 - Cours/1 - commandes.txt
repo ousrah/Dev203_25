@@ -33,6 +33,10 @@ cd myPorject
 
 npm run build
 
+composer run dev 
+
+ou bien 
+
 php artisan serve
 
 
