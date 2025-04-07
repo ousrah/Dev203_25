@@ -1,0 +1,7 @@
+https://www.itsolutionstuff.com/post/laravel-10-send-email-tutorial-exampleexample.html
+
+https://www.itsolutionstuff.com/post/laravel-custom-login-and-registration-exampleexample.html
+
+https://www.itsolutionstuff.com/post/laravel-custom-forgot-reset-password-exampleexample.html
+
+https://www.itsolutionstuff.com/post/laravel-custom-email-verification-system-exampleexample.html
