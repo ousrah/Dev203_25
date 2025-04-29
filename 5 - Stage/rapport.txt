@@ -13,11 +13,9 @@ Livrables
  3 - Soutenance
 
 
-
-
-
-
 Rapport de stage
+
+
 
 minimum 30 pages
 minimum 28 lignes par page
@@ -39,13 +37,14 @@ entete et pied de page (rappel de la page de garde)
 		Titre du rapport - Développement d'une application web pour la gestion des employés
 		Réalisé par 
 		Encadré par
-		Année de formation 2023-2024
+		Année de formation 2024-2025
 
 	Dedicace
 	Remerciements
 	Sommaire --> automatique avec numéros de pages
 	Introduction (1 à 2 pages)
 		Pourquoi le stage
+		ou est ce que j'ai effectué mon stage
 		Ou est ce qu'on m'a demandé dans le stage
 		Qu'est ce que j'ai fait dans mon stage
 
@@ -65,7 +64,7 @@ entete et pied de page (rappel de la page de garde)
 	Chapitre 5 - Manuel d'utilisateur (comme contenu intégré ou comme  petit livret A5 séparé)
 	Chapitre 6 - Manuel d'installation et d'administration (comme contenu intégré ou comme  petit livret A5 séparé)
 
-	..... (ce document représente des suggestion que vous n'êtes pas obligé de respecter à 100%, ajouter d'autres chapitres ou enlever des chapitres a votre guise)
+	..... (ce document représente des suggestions que vous n'êtes pas obligé de le respecter à 100%, ajouter d'autres chapitres ou enlever des chapitres a votre guise)
 
 	Conclusion (2 paragraphes ~une page)
 		Qu'est ce que j'ai appris dans mon stage
